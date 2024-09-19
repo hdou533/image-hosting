@@ -1,5 +1,7 @@
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { Buffer } from "buffer";
+import fs from "fs";
+import path from "path";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -35,7 +37,14 @@ export const uploadFileToS3 = async (file: Express.Multer.File) => {
     await s3Client.send(new PutObjectCommand(uploadParams));
     const fileUrl = `https://${uploadParams.Bucket}.s3.amazonaws.com/${uploadParams.Key}`;
     const originalName = file.filename;
-    console.log(fileUrl);
+
+    fs.unlink(file.path, (err) => {
+      if (err) {
+        console.error("Failed to delete local file: ", err);
+      } else {
+        console.log(`successfully deleted ${file.path}`);
+      }
+    });
     return { fileUrl, originalName };
   } catch (error) {
     throw new Error(`Failed to upload file: ${error}`);

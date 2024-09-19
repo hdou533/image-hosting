@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import router from "./routes/uploadRoutes";
+import uploadRoutes from "./routes/uploadRoutes";
 import cors from "cors";
 
 dotenv.config();
@@ -17,6 +17,6 @@ mongoose
 
 app.use(express.json());
 app.use(cors());
-app.use(router);
+app.use("/uploads", uploadRoutes);
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
