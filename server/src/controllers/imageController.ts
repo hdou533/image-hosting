@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { uploadFileToS3 } from "../services/s3";
 import Image from "../models/Image";
 
-export const uploadController = async (req: Request, res: Response) => {
+export const uploadImage = async (req: Request, res: Response) => {
   try {
     if (!req.file) {
       return res.status(400).json({
@@ -24,5 +24,20 @@ export const uploadController = async (req: Request, res: Response) => {
   } catch (error) {
     console.error("Error uploading file:", error);
     res.status(500).json({ error: error });
+  }
+};
+
+export const getImage = async (req: Request, res: Response) => {
+  try {
+    const data = await Image.find();
+
+    if (!data || data.length === 0) {
+      console.log("No images found in the database.");
+      return res.status(404).json({ message: "No images found" });
+    }
+    console.log("Fetched images:", data);
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch images" });
   }
 };

@@ -1,11 +1,17 @@
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import Homepage from "./pages/Homepage";
 import "./App.css";
-import FileUpload from "./components/FileUpload";
 
 function App() {
   return (
-    <>
-      <FileUpload />
-    </>
+    <div className="App">
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/about" element={<Homepage />} />
+        <Route path="/contact" element={<Homepage />} />
+      </Routes>
+    </div>
   );
 }
 

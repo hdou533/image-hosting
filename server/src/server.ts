@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import uploadRoutes from "./routes/uploadRoutes";
+import imageRoutes from "./routes/imageRoutes";
 import cors from "cors";
 
 dotenv.config();
@@ -15,8 +15,9 @@ mongoose
   .then(() => console.log("MongoDB connected."))
   .catch((err) => console.error(err));
 
-app.use(express.json());
 app.use(cors());
-app.use("/uploads", uploadRoutes);
+app.use(express.json());
+
+app.use("/api", imageRoutes);
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
