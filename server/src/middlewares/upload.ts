@@ -2,14 +2,7 @@ import multer from "multer";
 import path from "path";
 import { Request } from "express";
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, "../../uploads"));
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + path.extname(file.originalname));
-  },
-});
+const storage = multer.memoryStorage();
 
 const fileFilter = (
   req: Request,

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import React, { useState } from "react";
 
 interface FormData {
   image: FileList;
@@ -23,7 +23,7 @@ const FileUpload = () => {
         }
 
         const res = await axios.post(
-          "http://localhost:3000/uploads",
+          "http://localhost:3000/api/upload",
           formData,
           {
             headers: {

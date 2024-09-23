@@ -10,7 +10,9 @@ export const uploadImage = async (req: Request, res: Response) => {
       });
     }
 
-    const { fileUrl, originalName } = await uploadFileToS3(req.file);
+    const originalName = req.file.originalname;
+
+    const { fileUrl } = await uploadFileToS3(req.file);
 
     const image = new Image({
       originalName: originalName,

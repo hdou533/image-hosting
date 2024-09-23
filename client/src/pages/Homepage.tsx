@@ -2,6 +2,7 @@ import axios from "../api/axios";
 import React, { useEffect, useState } from "react";
 import { Image } from "../types/index";
 import ImageCard from "../components/ImageCard";
+import FileUpload from "../components/FileUpload";
 
 const Homepage = () => {
   const [images, setImages] = useState<Image[]>([]);
@@ -21,7 +22,7 @@ const Homepage = () => {
       <div className="flex justify-between">
         <div>Filters add later</div>
         <div>
-          <button className="text-red-500">Upload new</button>
+          <FileUpload />
         </div>
       </div>
       <div>
