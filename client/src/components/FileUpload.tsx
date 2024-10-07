@@ -99,7 +99,7 @@ const FileUpload = ({ onClose }) => {
         <label
           htmlFor="file-upload"
           className="my-4 flex items-center justify-center
-                      w-full h-32 border-2 border-dashed border-gray-300 
+                      w-full h-32 border-2 border-dashed border-gray-300
                       rounded-lg cursor-pointer hover:border-blue-500
                       transition duration-200"
         >
