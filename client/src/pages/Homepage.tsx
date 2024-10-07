@@ -33,10 +33,10 @@ const Homepage = () => {
         <div>Filters add later</div>
         <button
           onClick={handleClick}
-          className="flex gap-2 justify-between items-center border-dashed border-2 border-gray-500 rounded-md p-2"
+          className="flex gap-2 justify-between items-center border-dashed border-2 border-blue-400 rounded-md p-2"
         >
-          <GrAdd className="font-bold text-gray-700" />
-          <span className="font-semibold text-gray-700">Upload Image</span>
+          <GrAdd className="font-bold text-blue-500" />
+          <span className="font-semibold text-blue-500">Upload Image</span>
         </button>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

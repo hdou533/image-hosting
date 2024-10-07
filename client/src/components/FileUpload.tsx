@@ -21,10 +21,12 @@ const FileUpload = ({ onClose }) => {
   } = useForm<FormData>();
 
   const onSubmit = async (data: FormData) => {
+    console.log("Form data submitted:", data.image); // Log the submitted data
+
     try {
       const formData = new FormData();
       if (data.image) {
-        formData.append("image", data.image); // Append the image to formData
+        formData.append("image", data.image[0]); // Append the image to formData
         console.log("FormData before sending:", formData); // Log FormData
       } else {
         console.error("No file selected.");
@@ -64,31 +66,32 @@ const FileUpload = ({ onClose }) => {
     }
   };
 
-  const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      const selectedFile = e.target.files[0];
-      console.log("Selected file:", selectedFile); // Log the selected file
-      setValue("image", selectedFile); // Set the file in the form state
-      setImagePreview(URL.createObjectURL(selectedFile)); // Create a preview URL
-      console.log("Image value set in form state:", watch("image")); // Log the current value of the image field
-    } else {
-      console.log("No file selected."); // Log if no file is selected
-    }
-  };
+  // const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   if (e.target.files && e.target.files.length > 0) {
+  //     const selectedFile = e.target.files[0];
+  //     // console.log("Selected file:", selectedFile); // Log the selected file
+  //     setValue("image", selectedFile); // Set the file in the form state
+  //     setImagePreview(URL.createObjectURL(selectedFile)); // Create a preview URL
+  //     console.log("Current image value:", watch("image"));
+  //     // console.log("Image value set in form state:", watch("image")); // Log the current value of the image field
+  //   } else {
+  //     console.log("No file selected."); // Log if no file is selected
+  //   }
+  // };
 
-  const removeImage = () => {
-    setValue("image", null);
-    setImagePreview(null); // Clear the image preview
-  };
+  // const removeImage = () => {
+  //   setValue("image", null);
+  //   setImagePreview(null); // Clear the image preview
+  // };
 
-  useEffect(() => {
-    // Clean up the URL.createObjectURL() on unmount or when imagePreview changes
-    return () => {
-      if (imagePreview) {
-        URL.revokeObjectURL(imagePreview);
-      }
-    };
-  }, [imagePreview]);
+  // useEffect(() => {
+  //   // Clean up the URL.createObjectURL() on unmount or when imagePreview changes
+  //   return () => {
+  //     if (imagePreview) {
+  //       URL.revokeObjectURL(imagePreview);
+  //     }
+  //   };
+  // }, [imagePreview]);
 
   return (
     <div>
@@ -104,10 +107,10 @@ const FileUpload = ({ onClose }) => {
             id="file-upload"
             type="file"
             {...register("image", { required: "File is required." })} // Register the file input with a custom error message
-            className="hidden"
-            onChange={handleFileInput}
+            // className="hidden"
+            // onChange={handleFileInput}
           />
-          <GrAdd className="text-6xl text-gray-500" />
+          {/* <GrAdd className="text-6xl text-gray-500" /> */}
         </label>
         {errors.image && <p className="text-red-500">{errors.image.message}</p>}{" "}
         {/* Display validation error */}
@@ -120,7 +123,7 @@ const FileUpload = ({ onClose }) => {
             />
             <button
               type="button"
-              onClick={removeImage}
+              // onClick={removeImage}
               className="absolute -top-1 -right-1 bg-red-500 rounded-full p-1 shadow-md
                        hover:bg-red-600 transition duration-200"
             >
